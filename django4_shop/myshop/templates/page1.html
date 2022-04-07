@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>page1.html</title>
+<script type="text/javascript">
+window.onload = function(){
+	document.querySelector("#btnOk").onclick = function(){
+		frm.submit();
+	}
+}
+</script>
+</head>
+<body>
+<table>
+	<tr>
+		<td><img src="/static/images/pic1.png" style="width:30%"/></td>
+		<td>
+		<pre>
+		사용연령: 성인용
+		용도: 비말,초미세먼지,황사 등
+		마스크 사용연령: 대형
+		총 수량: 50매
+		마스크 색상계열: 화이트계열
+		쿠팡상품번호: 4366743333 - 5142489880
+		</pre>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<form action="cart" name="frm" method="post">{% csrf_token %}
+				<input type="hidden" name="name" value="마스크1"/>
+				<input type="hidden" name="price" value="20000"/>
+				<input type="button" id="btnOk" value="장바구니에 물건담기"/>
+				<input type="button" value="홈으로" onclick="history.back()"/>
+			</form>
+		</td>
+	</tr>
+</table>
+</body>
+</html>
