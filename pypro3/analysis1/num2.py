@@ -9,6 +9,7 @@ s = 'tom'
 ss = ['tom', 'james', 'oscar']
 print(ss, type(ss))  # <class 'list'>
 ss2 = np.array(ss)
+
 print(ss2, type(ss2))  # <class 'numpy.ndarray'>
 
 print('---list/ndarray 기억 상태 구분---')
