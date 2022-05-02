@@ -23,7 +23,7 @@ print('t값:%.3f, p-value:%.3f'%result)  # p-value:0.144 >0.05 이므로 귀무�
 # 실습 파일 : one_sample.csv
 # 참고 : time에 공백을 제거할 땐 ***.time.replace("     ", "")
 # 귀무 : 노트북 평균 사용 시간이 5.2시간이다.
-# 대립 : 노트북 평균 사용 시간이 5.2시간이 아니다(크다).
+# 대립 : 노트북 평균 사용 시간이 5.2시간이 아니다.
 data = pd.read_csv("../testdata/one_sample.csv")
 data = data.replace("     ", "")
 data.time=pd.to_numeric(data.time)
@@ -40,7 +40,7 @@ print('t값:%.3f, p-value:%.5f'%result)  # p-value:0.00014 < 0.05 이므로 귀�
 # 메뉴 중  가격동향 -> 개인서비스요금 -> 조회유형:지역별, 품목:미용 자료를 파일로 받아 미용 요금을 얻도록 하자. 
 # 정부에서는 전국 평균 미용 요금이 15000원이라고 발표하였다. 이 발표가 맞는지 검정하시오.
 # 귀무 : 전국 평균 미용 요금이 15000원이다.
-# 대립 : 전국 평균 미용 요금은 15000원 이상이다.
+# 대립 : 전국 평균 미용 요금은 15000원이 아니다.
 data = pd.read_excel("../testdata/personalService.xls").T.dropna().iloc[2:,]
 data.columns = ['미용']
 
