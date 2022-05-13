@@ -25,7 +25,7 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.3, rando
 print(x_train.shape, x_test.shape, y_train.shape, y_test.shape)  # (105, 2) (45, 2) (105,) (45,)
 
 """
-# 학습 데이터 크기의 차이가 심하면 스케일링(크기 표준화 또는 정규화)
+# 학습 데이터크기의차이가심하면 스케일링(크기 표준화 또는 정규화)
 # 독립변수를 스케일링 하면 모델이 안정성, 수렴 속도 향상, 오버플로우/언더플로우 등의 방지에 효과적
 print(x_train[:3])
 sc = StandardScaler() # 표준화
@@ -40,13 +40,15 @@ print(inver_x_train[:3])
 """
 
 # model
-# model = LogisticRegression(C = 100.0, random_state = 0, solver='lbfgs', multi_class='auto')  
+#model = LogisticRegression(C = 100.0, random_state = 0, solver='lbfgs', multi_class='auto')  
 # C 속성 : L2 규제(모델에 패널티 적용) 값이 작을수록 더 강한 정규화 규제가 진행됨
 
-from sklearn import  tree
-model = tree.DecisionTreeClassifier(criterion = 'entropy',
-                                    max_depth = 3,
-                                    random_state = 0)
+# import xgboost as xgb
+# model = xgb.XGBClassifier(boost= 'gbtree', n_estimators=500, random_state =1)
+
+from sklearn import svm
+model = svm.SVC(C = 1)
+# model = svm.linearSVC(C = 100)
 print(model)
 model.fit(x_train, y_train)  # 학습 진행
 
@@ -83,7 +85,7 @@ new_data = np.array([[5.1, 2.4], [0.3, 0.3], [3.4, 0.2]])
 
 new_pred = read_model.predict(new_data)
 print('예측 결과 : ',new_pred)
-print(read_model.predict_proba(new_data))
+# print(read_model.predict_proba(new_data))
 
 # 시각화
 import matplotlib.pyplot as plt
@@ -131,20 +133,3 @@ y_combined = np.hstack((y_train, y_test))
 plot_decision_region(X=x_combined_std, y=y_combined, 
                      classifier=read_model, 
                      test_idx=range(105, 150), title='scikit-learn제공')
-
-# tree 형태의 시각화
-import pydotplus
-from io import StringIO  # StringIO는 파일처럼 흉내내는 객체
-
-dot_data = StringIO()
-tree.export_graphviz(read_model, feature_names = iris.feature_names[2:4],
-                                out_file = dot_data, filled = True, rounded = True)
-graph = pydotplus.graph_from_dot_data(dot_data.getvalue())
-graph.write_png('tree_iris.png')
-
-import matplotlib.pyplot as plt
-from matplotlib.pyplot import imread
-
-img = imread('tree_iris.png')
-plt.imshow(img)
-plt.show()
